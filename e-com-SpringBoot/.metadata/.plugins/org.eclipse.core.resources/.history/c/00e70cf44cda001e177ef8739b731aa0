@@ -1,0 +1,22 @@
+package org.jsp.ecommerce.controller;
+
+import org.jsp.ecommerce.dto.ResponseStructure;
+import org.jsp.ecommerce.model.Product;
+import org.jsp.ecommerce.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+	@Autowired
+	private ProductService service;
+	
+	public ResponseEntity<ResponseStructure<Product>> saveProduct(@RequestBody Product p) {
+		return service.saveProduct(p);
+	}
+}

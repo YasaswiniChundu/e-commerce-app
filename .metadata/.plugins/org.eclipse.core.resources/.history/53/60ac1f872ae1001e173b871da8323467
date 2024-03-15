@@ -1,0 +1,63 @@
+package org.jsp.ecommerce.controller;
+
+import org.jsp.ecommerce.dto.ResponseStructure;
+import org.jsp.ecommerce.model.Merchant;
+import org.jsp.ecommerce.service.MerchantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@RestController
+@RequestMapping("/merchants")
+@CrossOrigin
+public class MerchantController {
+
+	@Autowired
+	private MerchantService service;
+
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public ResponseEntity<ResponseStructure<Merchant>> saveMerchant(@RequestBody Merchant m,
+			HttpServletRequest request) {
+		return service.saveMerchant(m, request);
+	}
+
+	@PutMapping
+	public ResponseEntity<ResponseStructure<Merchant>> updateMerchant(@RequestBody Merchant m) {
+		return service.updateMerchant(m);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ResponseStructure<Merchant>> findById(@PathVariable(name = "id") int id) {
+		return service.findById(id);
+	}
+
+	@PostMapping("/verify-by-phone")
+	public ResponseEntity<ResponseStructure<Merchant>> verifyByPhpne(@RequestParam long phone,
+			@RequestParam String password) {
+		return service.verifyByPhone(phone, password);
+	}
+
+	@PostMapping("/verify-by-email")
+	public ResponseEntity<ResponseStructure<Merchant>> verifyByEmail(@RequestParam String email,
+			@RequestParam String password) {
+		return service.verifyByEmail(email, password);
+	}
+	
+	@GetMapping("/activate")
+	public ResponseEntity<ResponseStructure<String>>activate(@RequestParam String token){
+		return service.activate(token);
+	}
+}

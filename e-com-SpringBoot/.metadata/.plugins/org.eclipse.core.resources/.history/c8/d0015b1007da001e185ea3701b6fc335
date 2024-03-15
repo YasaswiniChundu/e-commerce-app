@@ -1,0 +1,26 @@
+package org.jsp.ecommerce.service;
+
+import org.jsp.ecommerce.dao.MerchantDao;
+import org.jsp.ecommerce.dto.ResponseStructure;
+import org.jsp.ecommerce.model.Merchant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MerchantService {
+
+	@Autowired
+	private MerchantDao dao;
+	
+	public ResponseEntity<ResponseStructure<Merchant>> saveMerchant(Merchant m) {
+		ResponseStructure<Merchant> structure=new ResponseStructure<>();
+		structure.setMessage("Merchant saved successful...");
+		structure.setData(dao.saveMerchant(m));
+		structure.setStatusCode(HttpStatus.CREATED.value());
+		return new ResponseEntity<ResponseStructure<Merchant>>(structure, HttpStatus.CREATED);
+	}
+	
+	pub
+}

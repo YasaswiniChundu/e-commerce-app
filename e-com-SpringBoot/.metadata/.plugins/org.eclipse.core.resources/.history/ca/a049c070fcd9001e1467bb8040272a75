@@ -1,0 +1,19 @@
+package org.jsp.ecommerce.model;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Product {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(nullable=false)
+	private String name, brand, category, descrp, image_url;
+	
+	@Column(nullable=false)
+	private double cost;
+	
+	
+}

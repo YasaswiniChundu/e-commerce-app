@@ -1,0 +1,6 @@
+package org.jsp.ecommerce.util;
+
+public interface ApplicationConstants {
+	String VERIFY_LINK="/merchant/verify-merchanr?token=";
+
+}

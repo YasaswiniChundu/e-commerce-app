@@ -1,0 +1,6 @@
+package org.jsp.ecommerce.model;
+
+public class Address {
+
+	
+}
